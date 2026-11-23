@@ -1,12 +1,10 @@
 package ma.ofppt.ista.alamal
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
-import android.widget.ImageView
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.requestProfiling
 
 // MODE COURS (Playground) : écran VIDE pour tester en direct les exemples montrés en cours.
 // Écrivez le layout dans res/layout/activity_playground.xml et le code Kotlin ci-dessous, dans onCreate.
@@ -51,28 +49,52 @@ class PlaygroundActivity : AppCompatActivity() {
 //            numclient++
 //            txtClients.text=" clients present :$numclient"
 //    }
-        val btnEntrer = findViewById<Button>(R.id.btnEntrer)
-        val txtSalut = findViewById<TextView>(R.id.txtSalut)
-        val edtPrenom = findViewById<TextView>(R.id.edtPrenom)
-        btnEntrer.setOnClickListener {
-            if (edtPrenom.text.toString().isNotEmpty())  {
-                txtSalut.text="Bienvenue ${edtPrenom.text}"
+//        val btnEntrer = findViewById<Button>(R.id.btnEntrer)
+//        val txtSalut = findViewById<TextView>(R.id.txtSalut)
+//        val edtPrenom = findViewById<TextView>(R.id.edtPrenom)
+//        btnEntrer.setOnClickListener {
+//            if (edtPrenom.text.toString().isNotEmpty())  {
+//                txtSalut.text="Bienvenue ${edtPrenom.text}"
+//
+//
+//            }else{
+//                edtPrenom.error="Entrer votre prenom"
+//            }
+//
+//        }
+//        val fabNouveau = findViewById<View>(R.id.fabNouveau)
+//        fabNouveau.setOnClickListener {
+//
+//            txtSalut.text=""
+//            edtPrenom.text=null
+//            edtPrenom.error=null
+//        }
 
+        val btnTotal = findViewById<Button>(R.id.btnTotal)
+        val txtTotal = findViewById<TextView>(R.id.txtTotal)
+        val imp = findViewById<CheckBox>(R.id.chkImpression)
+        val casq = findViewById<CheckBox>(R.id.chkCasque)
+        val scan = findViewById<CheckBox>(R.id.chkScanner)
 
-            }else{
-                edtPrenom.error="Entrer votre prenom"
+        btnTotal.setOnClickListener {
+            var prix = 0
+            var options = 0
+            if (imp.isChecked) {
+                prix += 2
+                options++
+            }
+            if (casq.isChecked) {
+                prix += 2
+                options++
+            }
+            if (scan.isChecked) {
+                prix += 2
+                options++
             }
 
+            txtTotal.text = " $options options: $prix DH"
         }
-        val fabNouveau = findViewById<View>(R.id.fabNouveau)
-        fabNouveau.setOnClickListener {
-
-            txtSalut.text=""
-            edtPrenom.text=null
-            edtPrenom.error=null
-        }
-
-
 
     }
+
 }
