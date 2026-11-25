@@ -1,14 +1,14 @@
 package ma.ofppt.ista.alamal
 
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.CheckBox
-import android.widget.RadioButton
-import android.widget.RadioGroup
+import android.widget.ListView
+import android.widget.Spinner
 import android.widget.TextView
-import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.materialswitch.MaterialSwitch
 
 // MODE COURS (Playground) : écran VIDE pour tester en direct les exemples montrés en cours.
 // Écrivez le layout dans res/layout/activity_playground.xml et le code Kotlin ci-dessous, dans onCreate.
@@ -99,30 +99,84 @@ class PlaygroundActivity : AppCompatActivity() {
 //            txtTotal.text = " $options options: $prix DH"
 //        }
         // Étape 3 — réagir au ToggleButton et au Switch
-        val tglClim = findViewById<ToggleButton>(R.id.tglClim)
-        val swSilence = findViewById<MaterialSwitch>(R.id.swSilence)
-        val txtEtat = findViewById<TextView>(R.id.txtEtat)
+//        val tglClim = findViewById<ToggleButton>(R.id.tglClim)
+//        val swSilence = findViewById<MaterialSwitch>(R.id.swSilence)
+//        val txtEtat = findViewById<TextView>(R.id.txtEtat)
 // Android donne 2 valeurs, dans cet ordre :
 //   bouton   = le ToggleButton qui vient de changer
 //   estActif = true (allumé) ou false (éteint)
 // On ne se sert pas de « bouton », mais on DOIT l'écrire : la 1re place
 // reçoit toujours le bouton. Avec un seul nom, estActif recevrait le bouton
 // et Kotlin refuserait de compiler.
-        tglClim.setOnCheckedChangeListener { bouton, estActif ->
-            if (estActif) {
-                txtEtat.text = "Climatisation allumée"
-            } else {
-                txtEtat.text = "Climatisation éteinte"
+//        tglClim.setOnCheckedChangeListener { bouton, estActif ->
+//            if (estActif) {
+//                txtEtat.text = "Climatisation allumée"
+//            } else {
+//                txtEtat.text = "Climatisation éteinte"
+//            }
+//        }
+//// Même principe pour le Switch : bouton (non utilisé), puis estActif
+//        swSilence.setOnCheckedChangeListener { bouton, estActif ->
+//            if (estActif) {
+//                txtEtat.text = "Mode silencieux : sonneries coupées"
+//            } else {
+//                txtEtat.text = "Mode silencieux désactivé"
+//            }
+//        }
+       val sp01=findViewById<Spinner>(R.id.spPoste)
+        val txtPoste = findViewById<TextView>(R.id.txtPoste)
+
+        sp01.onItemSelectedListener=object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val item=parent?.getItemAtPosition(position).toString()
+                txtPoste.text= "Poste choisi : $item"
             }
-        }
-// Même principe pour le Switch : bouton (non utilisé), puis estActif
-        swSilence.setOnCheckedChangeListener { bouton, estActif ->
-            if (estActif) {
-                txtEtat.text = "Mode silencieux : sonneries coupées"
-            } else {
-                txtEtat.text = "Mode silencieux désactivé"
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
             }
+
+
+
+
+
+
+
         }
+        val sp02=findViewById<Spinner>(R.id.spPosteCode)
+        val txt02=findViewById<TextView>(R.id.txtPosteCode)
+        val items1= mutableListOf<String>("Poste01","Poste02","Poste03")
+        val lstposteres=resources.getStringArray(R.array.s02_postes).toList()
+        val adapteur= ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,items1)
+        val adapteur2= ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,lstposteres)
+        sp02.adapter=adapteur
+        sp02.onItemSelectedListener=object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                txt02.text=parent?.getItemAtPosition(position).toString()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                txt02.text="aucun poste choisie"
+            }
+
+        }
+        val btnVider=findViewById<Button>(R.id.btnVider)
+        btnVider.setOnClickListener{
+            adapteur.clear()
+        }
+
+
+
     }
 
 }
