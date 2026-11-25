@@ -1,6 +1,8 @@
 package ma.ofppt.ista.alamal
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -123,60 +125,78 @@ class PlaygroundActivity : AppCompatActivity() {
 //                txtEtat.text = "Mode silencieux désactivé"
 //            }
 //        }
-       val sp01=findViewById<Spinner>(R.id.spPoste)
-        val txtPoste = findViewById<TextView>(R.id.txtPoste)
+//       val sp01=findViewById<Spinner>(R.id.spPoste)
+//        val txtPoste = findViewById<TextView>(R.id.txtPoste)
+//
+//        sp01.onItemSelectedListener=object : AdapterView.OnItemSelectedListener{
+//            override fun onItemSelected(
+//                parent: AdapterView<*>?,
+//                view: View?,
+//                position: Int,
+//                id: Long
+//            ) {
+//                val item=parent?.getItemAtPosition(position).toString()
+//                txtPoste.text= "Poste choisi : $item"
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>?) {
+//                TODO("Not yet implemented")
+//            }
+//
+//
+//
+//
+//
+//
+//
+//        }
+//        val sp02=findViewById<Spinner>(R.id.spPosteCode)
+//        val txt02=findViewById<TextView>(R.id.txtPosteCode)
+//        val items1= mutableListOf<String>("Poste01","Poste02","Poste03")
+//        val lstposteres=resources.getStringArray(R.array.s02_postes).toList()
+//        val adapteur= ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,items1)
+//        val adapteur2= ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,lstposteres)
+//        sp02.adapter=adapteur
+//        sp02.onItemSelectedListener=object: AdapterView.OnItemSelectedListener{
+//            override fun onItemSelected(
+//                parent: AdapterView<*>?,
+//                view: View?,
+//                position: Int,
+//                id: Long
+//            ) {
+//                txt02.text=parent?.getItemAtPosition(position).toString()
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>?) {
+//                txt02.text="aucun poste choisie"
+//            }
+//
+//        }
+//        val btnVider=findViewById<Button>(R.id.btnVider)
+//        btnVider.setOnClickListener{
+//            adapteur.clear()
+//        }
 
-        sp01.onItemSelectedListener=object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                val item=parent?.getItemAtPosition(position).toString()
-                txtPoste.text= "Poste choisi : $item"
+
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        menuInflater.inflate(R.menu.s02_menu_principal, menu)
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val t=findViewById<TextView>(R.id.txtMenu)
+        when(item.itemId){
+            R.id.menu_tarifs-> t.text="Les tarifs!!!"
+            R.id.menu_aide-> t.text="Appelez 071545484 pour l'aide"
+            R.id.menu_apropos-> t.text="Nous Sommes CyberCafe"
+            else->{
+                return super.onOptionsItemSelected(item)
             }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
-
-
-
-
-
-
         }
-        val sp02=findViewById<Spinner>(R.id.spPosteCode)
-        val txt02=findViewById<TextView>(R.id.txtPosteCode)
-        val items1= mutableListOf<String>("Poste01","Poste02","Poste03")
-        val lstposteres=resources.getStringArray(R.array.s02_postes).toList()
-        val adapteur= ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,items1)
-        val adapteur2= ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,lstposteres)
-        sp02.adapter=adapteur
-        sp02.onItemSelectedListener=object: AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                txt02.text=parent?.getItemAtPosition(position).toString()
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                txt02.text="aucun poste choisie"
-            }
-
-        }
-        val btnVider=findViewById<Button>(R.id.btnVider)
-        btnVider.setOnClickListener{
-            adapteur.clear()
-        }
-
-
-
+        return true
     }
 
 }
