@@ -1,6 +1,9 @@
 package ma.ofppt.ista.alamal
 
+import android.app.Notification
 import android.os.Bundle
+
+import android.view.ContextMenu
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -11,6 +14,8 @@ import android.widget.ListView
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.ActionMode
+
 
 // MODE COURS (Playground) : écran VIDE pour tester en direct les exemples montrés en cours.
 // Écrivez le layout dans res/layout/activity_playground.xml et le code Kotlin ci-dessous, dans onCreate.
@@ -178,25 +183,69 @@ class PlaygroundActivity : AppCompatActivity() {
 //        }
 
 
+//
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//
+//        menuInflater.inflate(R.menu.s02_menu_principal, menu)
+//        return true
+//    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        val t=findViewById<TextView>(R.id.txtMenu)
+//        when(item.itemId){
+//            R.id.menu_tarifs-> t.text="Les tarifs!!!"
+//            R.id.menu_aide-> t.text="Appelez 071545484 pour l'aide"
+//            R.id.menu_apropos-> t.text="Nous Sommes CyberCafe"
+//            else->{
+//                return super.onOptionsItemSelected(item)
+//            }
+//        }
+//        return true
+//    }
+        val txtRes=findViewById<TextView>(R.id.txtResa)
+        val txtacc=findViewById<TextView>(R.id.txtAction)
+        txtRes.setOnLongClickListener {
 
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-
-        menuInflater.inflate(R.menu.s02_menu_principal, menu)
-        return true
-    }
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val t=findViewById<TextView>(R.id.txtMenu)
-        when(item.itemId){
-            R.id.menu_tarifs-> t.text="Les tarifs!!!"
-            R.id.menu_aide-> t.text="Appelez 071545484 pour l'aide"
-            R.id.menu_apropos-> t.text="Nous Sommes CyberCafe"
-            else->{
-                return super.onOptionsItemSelected(item)
-            }
+            startSupportActionMode(ClassDeCallBack(txtRes,txtacc))
+            true
         }
-        return true
     }
+    class ClassDeCallBack( val txtRes:TextView,val txtacc:TextView): ActionMode.Callback{
+        override fun onActionItemClicked(
+            mode: ActionMode?,
+            item: MenuItem?
+        ): Boolean {
+
+
+            when(item?.itemId){
+                    R.id.menu_aide-> txtacc.text="Selected:Aide"
+                R.id.menu_apropos-> txtacc.text="Selected:A propos"
+            }
+            return true
+        }
+
+        override fun onCreateActionMode(
+            mode: ActionMode?,
+            menu: Menu?
+        ): Boolean {
+            mode?.menuInflater?.inflate(R.menu.s02_menu_principal, menu)
+          return true
+        }
+
+        override fun onDestroyActionMode(mode: ActionMode?) {
+            return
+        }
+
+        override fun onPrepareActionMode(
+            mode: ActionMode?,
+            menu: Menu?
+        ): Boolean {
+            return false
+        }
+
+    }
+
+
+
+
 
 }

@@ -224,12 +224,36 @@
 <!--            android:layout_height="wrap_content"-->
 <!--            android:id="@+id/btnVider"-->
 <!--            android:text="Vider la liste"/>-->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtMenu"
-            android:text="Touchez les 3 points ou l'icone en haut a droite"
-            android:textSize="22sp"/>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/txtMenu"-->
+<!--            android:text="Touchez les 3 points ou l'icone en haut a droite"-->
+<!--            android:textSize="22sp"/>-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Appui long sur la reservation"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/txtResa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#E8F5E9"
+        android:padding="16dp"
+        android:text="Reservation .
+        Hayat . Poste5 . 15h"
+        android:textSize="22sp"/>
+    <TextView
+        android:id="@+id/txtAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"/>
+
+
+
+
  </LinearLayout>
 <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
 <!--        android:layout_width="wrap_content"-->
