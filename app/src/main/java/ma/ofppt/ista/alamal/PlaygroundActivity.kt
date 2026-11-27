@@ -10,11 +10,13 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
+import androidx.appcompat.widget.PopupMenu
 
 
 // MODE COURS (Playground) : écran VIDE pour tester en direct les exemples montrés en cours.
@@ -201,51 +203,68 @@ class PlaygroundActivity : AppCompatActivity() {
 //        }
 //        return true
 //    }
-        val txtRes=findViewById<TextView>(R.id.txtResa)
-        val txtacc=findViewById<TextView>(R.id.txtAction)
-        txtRes.setOnLongClickListener {
-
-            startSupportActionMode(ClassDeCallBack(txtRes,txtacc))
-            true
-        }
-    }
-    class ClassDeCallBack( val txtRes:TextView,val txtacc:TextView): ActionMode.Callback{
-        override fun onActionItemClicked(
-            mode: ActionMode?,
-            item: MenuItem?
-        ): Boolean {
+//        val txtRes=findViewById<TextView>(R.id.txtResa)
+//        val txtacc=findViewById<TextView>(R.id.txtAction)
+//        txtRes.setOnLongClickListener {
+//
+//            startSupportActionMode(ClassDeCallBack(txtRes,txtacc))
+//            true
+//        }
 
 
-            when(item?.itemId){
-                    R.id.menu_aide-> txtacc.text="Selected:Aide"
-                R.id.menu_apropos-> txtacc.text="Selected:A propos"
+//    class ClassDeCallBack( val txtRes:TextView,val txtacc:TextView): ActionMode.Callback{
+//        override fun onActionItemClicked(
+//            mode: ActionMode?,
+//            item: MenuItem?
+//        ): Boolean {
+//
+//
+//            when(item?.itemId){
+//                    R.id.menu_aide-> txtacc.text="Selected:Aide"
+//                R.id.menu_apropos-> txtacc.text="Selected:A propos"
+//            }
+//            return true
+//        }
+//
+//        override fun onCreateActionMode(
+//            mode: ActionMode?,
+//            menu: Menu?
+//        ): Boolean {
+//            mode?.menuInflater?.inflate(R.menu.s02_menu_principal, menu)
+//          return true
+//        }
+//
+//        override fun onDestroyActionMode(mode: ActionMode?) {
+//            return
+//        }
+//
+//        override fun onPrepareActionMode(
+//            mode: ActionMode?,
+//            menu: Menu?
+//        ): Boolean {
+//            return false
+//        }
+//
+//    }
+
+
+        val img = findViewById<ImageButton>(R.id.btnPlus)
+        val txtImg = findViewById<TextView>(R.id.txtPopup)
+        img.setOnClickListener {
+
+            val popup = PopupMenu(this, img)
+            popup.menuInflater.inflate(R.menu.menu_popup, popup.menu)
+            popup.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.popup_message -> txtImg.text = "Message"
+                }
+                true
+
             }
-            return true
+            popup.show()
+
         }
 
-        override fun onCreateActionMode(
-            mode: ActionMode?,
-            menu: Menu?
-        ): Boolean {
-            mode?.menuInflater?.inflate(R.menu.s02_menu_principal, menu)
-          return true
-        }
-
-        override fun onDestroyActionMode(mode: ActionMode?) {
-            return
-        }
-
-        override fun onPrepareActionMode(
-            mode: ActionMode?,
-            menu: Menu?
-        ): Boolean {
-            return false
-        }
 
     }
-
-
-
-
-
 }
